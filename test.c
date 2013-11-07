@@ -8,7 +8,6 @@ int main()
 	int items_number = 10;
 	map_item items[items_number];
 	char *unknown;
-	int result;
 
 	char *keys[] = {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh", "iii", "jjj"};
 	char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
@@ -36,7 +35,7 @@ int main()
 	}
 
 	printf("before, for the key 'ddd', the value was '%s'\n", (char *) map_get_entry("ddd", &m));
-	result = map_add_entry("ddd", "new ddd", &m);
+	map_add_entry("ddd", "new ddd", &m);
 	printf("and after, for the key 'ddd', the value is '%s'\n", (char *) map_get_entry("ddd", &m));
 
 
