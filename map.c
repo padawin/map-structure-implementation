@@ -7,6 +7,18 @@ char _map_search_sub_collection(map *collection, const char *key, const size_t k
 void *map_get_entry(const char *key, map *collection)
 {
 	void *item;
+	int *index;
+	char found;
+
+	found = _map_search_sub_collection(collection, key, strlen(key), index, 0, collection->items_number - 1);
+
+	if (!found) {
+		item = NULL;
+	}
+	else {
+		item = collection->items[*index].item;
+	}
+
 	return item;
 }
 
