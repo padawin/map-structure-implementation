@@ -14,13 +14,11 @@ int main()
 
 	int i;
 	for (i = 0; i < items_number; ++i) {
-		//~items[i] = (map_item) calloc(1, sizeof(map_item));
 		items[i].index = i;
 		items[i].key = (char *) keys[i];
 		items[i].item = (char *) values[i];
 	}
 
-	//~m = (map) calloc(1, sizeof(map));
 	m.items = items;
 	m.items_number = items_number;
 
@@ -37,7 +35,6 @@ int main()
 	printf("before, for the key 'ddd', the value was '%s'\n", (char *) map_get_entry("ddd", &m));
 	map_add_entry("ddd", (char *) "new ddd", &m);
 	printf("and after, for the key 'ddd', the value is '%s'\n", (char *) map_get_entry("ddd", &m));
-
 
 	return 0;
 }
