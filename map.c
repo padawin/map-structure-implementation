@@ -72,6 +72,38 @@ char _map_search_sub_collection(
 	int end_index
 )
 {
+	// check bounds ?
+
 	char ret;
+	// take middle index, rounded on low value
+	int middle_index = start_index + (end_index - start_index) / 2;
+
+	int keys_comp = strncmp(collection->items[middle_index].key, key, key_len);
+	// the key is found or the search is finished and the key is not found
+	if (keys_comp == 0 || start_index == end_index - 1) {
+		*item_index = middle_index;
+		ret = (keys_comp == 0);
+	}
+	else if (keys_comp > 0) {// else if collection[middle_index]->key > key
+		ret = _map_search_sub_collection(
+			collection,
+			key,
+			key_len,
+			item_index,
+			start_index,
+			middle_index
+		);
+	}
+	else {
+		ret = _map_search_sub_collection(
+			collection,
+			key,
+			key_len,
+			item_index,
+			middle_index,
+			end_index
+		);
+	}
+
 	return ret;
 }
