@@ -28,7 +28,33 @@ int map_add_entry(
 	map *collection
 )
 {
+	// find index where entry must be inserted
 	int index;
+	char found;
+
+	index = -1;
+	found = _map_search_sub_collection(
+		collection,
+		key,
+		strlen(key),
+		&index,
+		0,
+		collection->items_number - 1
+	);
+
+	if (!found) {
+		// make room
+		// insert it
+		// set entry's index
+		index++;
+	}
+	else {
+		// delete the previous item ?
+		// set the new one
+		collection->items[index] = *entry;
+	}
+
+	// return entry's index
 	return index;
 }
 
