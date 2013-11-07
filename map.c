@@ -24,7 +24,7 @@ void *map_get_entry(const char *key, map *collection)
 
 int map_add_entry(
 	const char *key,
-	map_item *entry,
+	void *entry,
 	map *collection
 )
 {
@@ -51,7 +51,7 @@ int map_add_entry(
 	else {
 		// delete the previous item ?
 		// set the new one
-		collection->items[index] = *entry;
+		collection->items[index].item = entry;
 	}
 
 	// return entry's index

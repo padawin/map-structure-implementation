@@ -10,5 +10,5 @@ typedef struct {
 } map;
 
 void *map_get_entry(const char *key, map *collection);
-int map_add_entry(const char *key, map_item *entry, map *collection);
+int map_add_entry(const char *key, void *entry, map *collection);
 int map_remove_entry(const char *key, map *collection);
