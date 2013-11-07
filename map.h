@@ -1,3 +1,6 @@
+#define ENTRY_UPDATED 1
+#define ENTRY_ADDED 2
+
 typedef struct {
 	int index;
 	char *key;

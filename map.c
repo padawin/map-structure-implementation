@@ -30,9 +30,9 @@ int map_add_entry(
 {
 	// find index where entry must be inserted
 	int index;
+	int ret;
 	char found;
 
-	index = -1;
 	found = _map_search_sub_collection(
 		collection,
 		key,
@@ -47,15 +47,17 @@ int map_add_entry(
 		// insert it
 		// set entry's index
 		index++;
+		ret = ENTRY_ADDED;
 	}
 	else {
 		// delete the previous item ?
 		// set the new one
 		collection->items[index].item = entry;
+		ret = ENTRY_UPDATED;
 	}
 
 	// return entry's index
-	return index;
+	return ret;
 }
 
 int map_remove_entry(const char *key, map *collection)
