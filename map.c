@@ -154,7 +154,7 @@ char _map_search_sub_collection(
 
 	char ret;
 	// take middle index, rounded on low value
-	int middle_index = start_index + (end_index - start_index) / 2;
+	middle_index = (start_index + end_index) / 2;
 
 	int keys_comp = strncmp(collection->items[middle_index].key, key, key_len);
 	// the key is found or the search is finished and the key is not found
