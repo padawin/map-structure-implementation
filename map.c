@@ -1,6 +1,5 @@
 #include "map.h"
 #include <string.h>
-#include <stdio.h>
 
 /**
  * Library to use map structures acting as associative arrays.
