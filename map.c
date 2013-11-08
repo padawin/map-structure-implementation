@@ -81,7 +81,7 @@ int map_add_entry(
 			return MAP_FULL;
 		}
 
-		map_item item;
+		struct map_item item;
 		item.key = (char *) key;
 		item.index = index;
 		item.item = entry;

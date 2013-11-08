@@ -2,16 +2,16 @@
 #define MAP_ENTRY_ADDED 2
 #define MAP_FULL -1
 
-typedef struct {
+struct map_item {
 	int index;
 	char *key;
 	void *item;
-} map_item;
+};
 
 typedef struct {
 	int items_number;
 	int total_items_number;
-	map_item *items;
+	struct map_item *items;
 } map;
 
 void *map_get_entry(const char *key, map *collection);

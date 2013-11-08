@@ -14,7 +14,7 @@ int main()
 	const char *keys[] = {"ddd", "aaa", "ggg", "ccc", "eee", "fff", "bbb", "jjj", "iii", "hhh"};
 	const char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
 
-	m.items = (map_item*) calloc((size_t) total_items_number, sizeof(map_item));
+	m.items = (struct map_item*) calloc((size_t) total_items_number, sizeof(struct map_item));
 	m.total_items_number = total_items_number;
 	m.items_number = 0;
 
