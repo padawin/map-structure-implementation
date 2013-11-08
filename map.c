@@ -1,5 +1,6 @@
 #include "map.h"
 #include <string.h>
+#include <stdlib.h>
 
 /**
  * Library to use map structures acting as associative arrays.
@@ -11,6 +12,18 @@
  * - delete an item
  */
 
+void map_init(map *collection, int total_items_number)
+{
+	collection->items = (struct map_item*) calloc((size_t) total_items_number, sizeof(struct map_item));
+	collection->total_items_number = total_items_number;
+	collection->items_number = 0;
+}
+
+void map_free(map *collection)
+{
+	free(collection->items);
+	collection->items_number = 0;
+}
 
 char _map_search_sub_collection(map *collection, const char *key, const size_t key_len, int *item_index, int start_index, int end_index);
 
