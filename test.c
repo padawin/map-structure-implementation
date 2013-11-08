@@ -6,10 +6,12 @@ int main()
 {
 	map m;
 	int items_number = 10;
-	int total_items_number = 15;
+	int total_items_number = 10;
 	char *unknown;
 
-	const char *keys[] = {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh", "iii", "jjj"};
+	//~const char *keys[] = {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh", "iii", "jjj"};
+	//~const char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
+	const char *keys[] = {"ddd", "aaa", "ggg", "ccc", "eee", "fff", "bbb", "jjj", "iii", "hhh"};
 	const char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
 
 	m.items = (map_item*) calloc((size_t) total_items_number, sizeof(map_item));
@@ -18,17 +20,16 @@ int main()
 
 	int i;
 	for (i = 0; i < items_number; i++) {
-		if (map_add_entry(keys[i], (char *) values[i], &m) == MAP_FULL) {
-			printf("Map full while trying to insert %s\n", keys[i]);
-		}
-		else {
-			//~printf("Direct access: %s\n", (char *) m.items[i].item);
-			printf("map_get_entry access: %s\n", (char *) map_get_entry(keys[i], &m));
-		}
+		map_add_entry(keys[i], (char *) values[i], &m);
+		printf("map_get_entry access: key: %s, value %s\n", keys[i], (char *) map_get_entry(keys[i], &m));
 	}
 
-	printf("%s\n", (char *) map_get_entry("aaa", &m));
-	printf("%s\n", (char *) map_get_entry("iii", &m));
+	// try to add an element in a full map
+	if (map_add_entry("11th", (char *) "unwanted value", &m) == MAP_FULL) {
+		printf("Map full while trying to insert %s\n", "11th");
+	}
+
+	// try to get an unexisting element
 	unknown = (char *) map_get_entry("uuu", &m);
 	if (unknown != NULL) {
 		printf("%s\n", unknown);
