@@ -49,7 +49,7 @@ void *map_get_entry(const char *key, map *collection)
  * @param const char *key Key to update or insert
  * @param void *entry Entry which must be stored for the given key
  * @param map *collection Collection to update
- * @return int ENTRY_UPDATED if a value has been updated, ENTRY_ADDED if
+ * @return int MAP_ENTRY_UPDATED if a value has been updated, MAP_ENTRY_ADDED if
  * 		no entry existed for the given key
  */
 int map_add_entry(
@@ -77,13 +77,13 @@ int map_add_entry(
 		// insert it
 		// set entry's index
 		index++;
-		ret = ENTRY_ADDED;
+		ret = MAP_ENTRY_ADDED;
 	}
 	else {
 		// delete the previous item ?
 		// set the new one
 		collection->items[index].item = entry;
-		ret = ENTRY_UPDATED;
+		ret = MAP_ENTRY_UPDATED;
 	}
 
 	// return entry's index

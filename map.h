@@ -1,5 +1,5 @@
-#define ENTRY_UPDATED 1
-#define ENTRY_ADDED 2
+#define MAP_ENTRY_UPDATED 1
+#define MAP_ENTRY_ADDED 2
 
 typedef struct {
 	int index;
