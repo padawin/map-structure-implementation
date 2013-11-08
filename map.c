@@ -172,13 +172,9 @@ char _map_search_sub_collection(
 			return 1;
 		}
 		// key must be placed after the last => not found
-		else if (comp_end < 0) {
+		else if (comp_end <= 0) {
 			*item_index = end_index;
-			return 0;
-		}
-		else if (comp_end == 0) {
-			*item_index = end_index;
-			return 1;
+			return comp_end == 0;
 		}
 	}
 
