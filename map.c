@@ -150,9 +150,38 @@ char _map_search_sub_collection(
 	int end_index
 )
 {
-	// check bounds ?
-
 	char ret;
+	int middle_index;
+	int comp_start, comp_end;
+
+	if (collection->items_number == 0) {
+		*item_index = -1;
+		return 0;
+	}
+	// check the boundaries
+	else if (start_index == 0 && end_index == collection->items_number - 1) {
+		comp_start = strncmp(key, collection->items[start_index].key, key_len);
+		comp_end = strncmp(collection->items[end_index].key, key, key_len);
+		// key must be placed before the first => not found
+		if (comp_start < 0) {
+			*item_index = -1;
+			return 0;
+		}
+		else if (comp_start == 0) {
+			*item_index = 0;
+			return 1;
+		}
+		// key must be placed after the last => not found
+		else if (comp_end < 0) {
+			*item_index = end_index;
+			return 0;
+		}
+		else if (comp_end == 0) {
+			*item_index = end_index;
+			return 1;
+		}
+	}
+
 	// take middle index, rounded on low value
 	middle_index = (start_index + end_index) / 2;
 
