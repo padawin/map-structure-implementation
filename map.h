@@ -1,5 +1,6 @@
-#define ENTRY_UPDATED 1
-#define ENTRY_ADDED 2
+#define MAP_ENTRY_UPDATED 1
+#define MAP_ENTRY_ADDED 2
+#define MAP_FULL -1
 
 typedef struct {
 	int index;
@@ -9,6 +10,7 @@ typedef struct {
 
 typedef struct {
 	int items_number;
+	int total_items_number;
 	map_item *items;
 } map;
 

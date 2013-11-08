@@ -49,7 +49,7 @@ void *map_get_entry(const char *key, map *collection)
  * @param const char *key Key to update or insert
  * @param void *entry Entry which must be stored for the given key
  * @param map *collection Collection to update
- * @return int ENTRY_UPDATED if a value has been updated, ENTRY_ADDED if
+ * @return int MAP_ENTRY_UPDATED if a value has been updated, MAP_ENTRY_ADDED if
  * 		no entry existed for the given key
  */
 int map_add_entry(
@@ -59,9 +59,14 @@ int map_add_entry(
 )
 {
 	// find index where entry must be inserted
-	int index;
-	int ret;
+	int index, ret, right_bound;
 	char found;
+
+	right_bound = collection->items_number - 1;
+	// empty collection
+	if (right_bound == -1) {
+		right_bound = 0;
+	}
 
 	found = _map_search_sub_collection(
 		collection,
@@ -69,21 +74,38 @@ int map_add_entry(
 		strlen(key),
 		&index,
 		0,
-		collection->items_number - 1
+		right_bound
 	);
 
 	if (!found) {
-		// make room
-		// insert it
-		// set entry's index
+		if (collection->items_number == collection->total_items_number) {
+			return MAP_FULL;
+		}
+
+		map_item item;
+		item.key = (char *) key;
+		item.index = index;
+		item.item = entry;
+
+		if (collection->items_number == 0) {
+			collection->items[0] = item;
+		}
+		else {
+			int i;
+			for (i = collection->items_number; i > index + 1; i--) {
+				collection->items[i] = collection->items[i - 1];
+			}
+			collection->items[index + 1] = item;
+		}
+		collection->items_number++;
 		index++;
-		ret = ENTRY_ADDED;
+		ret = MAP_ENTRY_ADDED;
 	}
 	else {
 		// delete the previous item ?
 		// set the new one
 		collection->items[index].item = entry;
-		ret = ENTRY_UPDATED;
+		ret = MAP_ENTRY_UPDATED;
 	}
 
 	// return entry's index
@@ -128,19 +150,49 @@ char _map_search_sub_collection(
 	int end_index
 )
 {
-	// check bounds ?
-
 	char ret;
+	int middle_index;
+	int comp_start, comp_end;
+
+	if (collection->items_number == 0) {
+		*item_index = -1;
+		return 0;
+	}
+	// check the boundaries
+	else if (start_index == 0 && end_index == collection->items_number - 1) {
+		comp_start = strncmp(key, collection->items[start_index].key, key_len);
+		comp_end = strncmp(collection->items[end_index].key, key, key_len);
+		// key must be placed before the first => not found
+		if (comp_start < 0) {
+			*item_index = -1;
+			return 0;
+		}
+		else if (comp_start == 0) {
+			*item_index = 0;
+			return 1;
+		}
+		// key must be placed after the last => not found
+		else if (comp_end < 0) {
+			*item_index = end_index;
+			return 0;
+		}
+		else if (comp_end == 0) {
+			*item_index = end_index;
+			return 1;
+		}
+	}
+
 	// take middle index, rounded on low value
-	int middle_index = start_index + (end_index - start_index) / 2;
+	middle_index = (start_index + end_index) / 2;
 
 	int keys_comp = strncmp(collection->items[middle_index].key, key, key_len);
+
 	// the key is found or the search is finished and the key is not found
 	if (keys_comp == 0 || start_index == end_index - 1) {
 		*item_index = middle_index;
 		ret = (keys_comp == 0);
 	}
-	else if (keys_comp > 0) {// else if collection[middle_index]->key > key
+	else if (keys_comp > 0) {
 		ret = _map_search_sub_collection(
 			collection,
 			key,
