@@ -10,6 +10,7 @@ typedef struct {
 
 typedef struct {
 	int items_number;
+	int total_items_number;
 	map_item *items;
 } map;
 

@@ -7,10 +7,13 @@ int main()
 	map m;
 	int items_number = 10;
 	map_item items[items_number];
+	int total_items_number = 15;
 	char *unknown;
 
 	const char *keys[] = {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh", "iii", "jjj"};
 	const char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
+
+	m.total_items_number = total_items_number;
 
 	int i;
 	for (i = 0; i < items_number; ++i) {
