@@ -73,9 +73,26 @@ int map_add_entry(
 	);
 
 	if (!found) {
-		// make room
-		// insert it
-		// set entry's index
+		if (collection->items_number == collection->total_items_number) {
+			return MAP_FULL;
+		}
+
+		map_item item;
+		item.key = (char *) key;
+		item.index = index;
+		item.item = entry;
+
+		if (collection->items_number == 0) {
+			collection->items[0] = item;
+		}
+		else {
+			int i;
+			for (i = collection->items_number; i > index; i--) {
+				collection->items[i] = collection->items[i - 1];
+			}
+			collection->items[index + 1] = item;
+		}
+		collection->items_number++;
 		index++;
 		ret = MAP_ENTRY_ADDED;
 	}
