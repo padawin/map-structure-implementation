@@ -59,9 +59,14 @@ int map_add_entry(
 )
 {
 	// find index where entry must be inserted
-	int index;
-	int ret;
+	int index, ret, right_bound;
 	char found;
+
+	right_bound = collection->items_number - 1;
+	// empty collection
+	if (right_bound == -1) {
+		right_bound = 0;
+	}
 
 	found = _map_search_sub_collection(
 		collection,
@@ -69,7 +74,7 @@ int map_add_entry(
 		strlen(key),
 		&index,
 		0,
-		collection->items_number - 1
+		right_bound
 	);
 
 	if (!found) {
@@ -87,7 +92,7 @@ int map_add_entry(
 		}
 		else {
 			int i;
-			for (i = collection->items_number; i > index; i--) {
+			for (i = collection->items_number; i > index + 1; i--) {
 				collection->items[i] = collection->items[i - 1];
 			}
 			collection->items[index + 1] = item;
