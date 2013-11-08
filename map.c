@@ -12,6 +12,13 @@
  * - delete an item
  */
 
+struct map_item {
+	int index;
+	char *key;
+	void *item;
+};
+
+
 void map_init(map *collection, int total_items_number)
 {
 	collection->items = (struct map_item*) calloc((size_t) total_items_number, sizeof(struct map_item));

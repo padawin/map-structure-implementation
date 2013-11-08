@@ -2,11 +2,7 @@
 #define MAP_ENTRY_ADDED 2
 #define MAP_FULL -1
 
-struct map_item {
-	int index;
-	char *key;
-	void *item;
-};
+struct map_item;
 
 typedef struct {
 	int items_number;
