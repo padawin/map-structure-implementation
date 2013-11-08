@@ -1,6 +1,5 @@
 #include "map.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 int main()
 {
@@ -14,9 +13,7 @@ int main()
 	const char *keys[] = {"ddd", "aaa", "ggg", "ccc", "eee", "fff", "bbb", "jjj", "iii", "hhh"};
 	const char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
 
-	m.items = (map_item*) calloc((size_t) total_items_number, sizeof(map_item));
-	m.total_items_number = total_items_number;
-	m.items_number = 0;
+	map_init(&m, total_items_number);
 
 	int i;
 	for (i = 0; i < items_number; i++) {
@@ -42,6 +39,6 @@ int main()
 	map_add_entry("ddd", (char *) "new ddd", &m);
 	printf("and after, for the key 'ddd', the value is '%s'\n", (char *) map_get_entry("ddd", &m));
 
-	free(m.items);
+	map_free(&m);
 	return 0;
 }
