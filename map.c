@@ -133,11 +133,31 @@ int map_add_entry(
 
 /**
  * Function to delete an entry.
- * Not implemented
+ *
+ * @param const char *key Key to delete
+ * @param map *collection The Map
+ * @return 1 if the key has been found and is deleted, 0 else.
  */
-int map_remove_entry(const char *key, map *collection)
+int map_delete_entry(const char *key, map *collection)
 {
-	return 1;
+	int i;
+	char deleted;
+
+	deleted = 0;
+	for (i = 0; i < collection->items_number; ++i) {
+		if (collection->items[i].key == key)
+			deleted = 1;
+
+		if (deleted == 1) {
+			if (i < collection->items_number - 1)
+				collection->items[i] = collection->items[i + 1];
+		}
+	}
+
+	if (deleted)
+		collection->items_number--;
+
+	return (int) deleted;
 }
 
 /**
