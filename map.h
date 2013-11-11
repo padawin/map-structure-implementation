@@ -14,4 +14,4 @@ void map_init(map *collection, int total_items_number);
 void map_free(map *collection);
 void *map_get_entry(const char *key, map *collection);
 int map_add_entry(const char *key, void *entry, map *collection);
-int map_remove_entry(const char *key, map *collection);
+int map_delete_entry(const char *key, map *collection);

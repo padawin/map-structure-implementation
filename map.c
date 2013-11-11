@@ -135,7 +135,7 @@ int map_add_entry(
  * Function to delete an entry.
  * Not implemented
  */
-int map_remove_entry(const char *key, map *collection)
+int map_delete_entry(const char *key, map *collection)
 {
 	return 1;
 }
