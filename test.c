@@ -39,6 +39,16 @@ int main()
 	map_add_entry("ddd", (char *) "new ddd", &m);
 	printf("and after, for the key 'ddd', the value is '%s'\n", (char *) map_get_entry("ddd", &m));
 
+
+	map_delete_entry("aaa", &m);
+	unknown = (char *) map_get_entry("aaa", &m);
+	if (unknown != NULL) {
+		printf("\"aaa\" is still in the map\n");
+	}
+	else {
+		printf("'aaa' is not in the map\n");
+	}
+
 	map_free(&m);
 	return 0;
 }
