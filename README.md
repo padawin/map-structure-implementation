@@ -17,7 +17,16 @@ Compile it:
 make
 ```
 
-And run it:
+Once it is compiled, you can run an example binary:
 ```
-./map
+./map-examples
 ```
+
+Or install the library to use it in your own projects:
+```
+make install
+```
+
+By default, the libmap.so will be installed in /usr/lib and the map.h in
+/usr/include. Those values can be changed in the Makefile before compiling it
+(variables $LIBDIR and $INCLDIR).
