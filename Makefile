@@ -1,13 +1,18 @@
 PROG   := map-examples
+LIB    := map.so
 CC     := gcc
 CFLAGS := -g -O2 -Wall -Wextra -Wwrite-strings -Wformat=2 -Wconversion -Wmissing-declarations -Wmissing-prototypes
 LDFLAGS:=
 CCDYNAMICFLAGS := ${CFLAGS} -fPIC
 LDDYNAMICFLAGS := -shared
 
+INSTALL=install -D
+
 SRC := $(wildcard *.c)
 OBJ := $(patsubst %.c,%.o,$(SRC))
 DEP := $(patsubst %.c,%.deps,$(SRC))
+
+BINDIR=$(DESTDIR)/usr/lib
 
 all: $(PROG) $(LIB)
 
@@ -21,6 +26,9 @@ all: $(PROG) $(LIB)
 
 %.so: %.o
 	${CC} ${LDDYNAMICFLAGS} -o $@ $< -o $@
+
+install:
+	$(INSTALL) $(LIB) $(BINDIR)/lib$(LIB)
 
 clean:
 	rm $(PROG)
