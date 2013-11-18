@@ -1,3 +1,6 @@
+#ifndef _MAPLIB
+#define _MAPLIB
+
 #define MAP_ENTRY_UPDATED 1
 #define MAP_ENTRY_ADDED 2
 #define MAP_FULL -1
@@ -15,3 +18,5 @@ void map_free(map *collection);
 void *map_get_entry(const char *key, map *collection);
 int map_add_entry(const char *key, void *entry, map *collection);
 int map_delete_entry(const char *key, map *collection);
+
+#endif
