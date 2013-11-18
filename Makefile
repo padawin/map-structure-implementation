@@ -12,7 +12,7 @@ SRC := $(wildcard *.c)
 OBJ := $(patsubst %.c,%.o,$(SRC))
 DEP := $(patsubst %.c,%.deps,$(SRC))
 
-BINDIR=$(DESTDIR)/usr/lib
+LIBDIR=$(DESTDIR)/usr/lib
 
 all: $(PROG) $(LIB)
 
@@ -28,7 +28,7 @@ all: $(PROG) $(LIB)
 	${CC} ${LDDYNAMICFLAGS} -o $@ $< -o $@
 
 install:
-	$(INSTALL) $(LIB) $(BINDIR)/lib$(LIB)
+	$(INSTALL) $(LIB) $(LIBDIR)/lib$(LIB)
 
 clean:
 	rm $(PROG)
