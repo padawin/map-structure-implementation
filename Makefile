@@ -1,5 +1,6 @@
 PROG   := map-examples
 LIB    := map.so
+INCL   := map.h
 CC     := gcc
 CFLAGS := -g -O2 -Wall -Wextra -Wwrite-strings -Wformat=2 -Wconversion -Wmissing-declarations -Wmissing-prototypes
 LDFLAGS:=
@@ -13,6 +14,7 @@ OBJ := $(patsubst %.c,%.o,$(SRC))
 DEP := $(patsubst %.c,%.deps,$(SRC))
 
 LIBDIR=$(DESTDIR)/usr/lib
+INCLDIR=$(DESTDIR)/usr/include
 
 all: $(PROG) $(LIB)
 
@@ -29,6 +31,7 @@ all: $(PROG) $(LIB)
 
 install:
 	$(INSTALL) $(LIB) $(LIBDIR)/lib$(LIB)
+	cp $(INCL) $(INCLDIR)/$(INCL)
 
 clean:
 	rm $(PROG)
