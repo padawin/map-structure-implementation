@@ -31,7 +31,7 @@ all: $(PROG) $(LIB)
 
 install:
 	$(INSTALL) $(LIB) $(LIBDIR)/lib$(LIB)
-	cp $(INCL) $(INCLDIR)/$(INCL)
+	$(INSTALL) $(INCL) $(INCLDIR)/$(INCL)
 
 clean:
 	rm $(PROG)
