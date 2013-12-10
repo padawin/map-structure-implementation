@@ -219,8 +219,7 @@ char _map_search_sub_collection(
 
 	// take middle index, rounded on low value
 	middle_index = (start_index + end_index) / 2;
-
-	int keys_comp = strncmp(collection->items[middle_index].key, key, key_len);
+	int keys_comp = strncmp(collection->items[middle_index].key, key, key_len) && strlen(collection->items[middle_index].key) == key_len;
 
 	// the key is found or the search is finished and the key is not found
 	if (keys_comp == 0 || start_index == end_index - 1) {
