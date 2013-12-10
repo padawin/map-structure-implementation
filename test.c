@@ -6,7 +6,7 @@ int main()
 	map m;
 	int items_number = 10;
 	int total_items_number = 10;
-	char *unknown;
+	char *unknown, *unknown_substring;
 
 	//~const char *keys[] = {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh", "iii", "jjj"};
 	//~const char *values[] = {"foo", "bar", "toto", "tata", "something", "10", "truc", "3.14", "moi", "vous"};
@@ -47,6 +47,15 @@ int main()
 	}
 	else {
 		printf("'aaa' is not in the map\n");
+	}
+
+	// e is the beginning of the key eee
+	unknown_substring = (char *) map_get_entry("e", &m);
+	if (unknown_substring != NULL) {
+		printf("\"e\" is in the map\n");
+	}
+	else {
+		printf("e' is not in the map\n");
 	}
 
 	map_free(&m);
